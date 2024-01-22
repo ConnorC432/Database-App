@@ -24,13 +24,18 @@
 			<Border>
 				<!-- Scroll Wheel for Database Connect Settings -->
 				<ScrollViewer>
-					<Grid ColumnDefinitions="Auto,1*,2*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" Margin="5">
+					<Grid ColumnDefinitions="Auto,1*,2*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="5">
+						<!-- Database Name -->
+						<TextBlock Grid.Column="0" Grid.Row="0" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database Name:"/>
+						<TextBox x:Name="dbNameBox" Grid.Column="1" Grid.Row="0" Margin="10" Watermark="Name"/>
 						<!-- Database IP/DNS -->
-						<TextBlock Grid.Column="0" Grid.Row="0" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database IP/DNS:"/>
-						<TextBox Grid.Column="1" Grid.Row="0" Margin="10" Watermark="IP/DNS"/>
+						<TextBlock Grid.Column="0" Grid.Row="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database IP/DNS:"/>
+						<TextBox x:Name="dbIPBox" Grid.Column="1" Grid.Row="1" Margin="10" Watermark="IP/DNS"/>
 						<!-- Database Port -->
-						<TextBlock Grid.Column="0" Grid.Row="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database Port:"/>
-						<ComboBox Grid.Column="1" Grid.Row="1" Margin="10" SelectedIndex="0" MaxDropDownHeight="200">
+						<TextBlock Grid.Column="0" Grid.Row="2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database Port:"/>
+						<ComboBox x:Name="dbPortBox" SelectionChanged="ComboBoxSelectionMade" Grid.Column="1" Grid.Row="2" Margin="10" SelectedIndex="1" MaxDropDownHeight="200">
+							<!-- Custom Port -->
+							<ComboBoxItem>Custom Port</ComboBoxItem>
 							<!-- Default Database Ports -->
 							<ComboBoxItem>MS SQL - 1433</ComboBoxItem>
 							<ComboBoxItem>MSQL - 1434</ComboBoxItem>
@@ -39,20 +44,19 @@
 							<ComboBoxItem>MySQL - 3306</ComboBoxItem>
 							<ComboBoxItem>PostgreSQL - 5432</ComboBoxItem>
 							<ComboBoxItem>MaxDB - 7210</ComboBoxItem>
-							<!-- Custom Port -->
-							<ComboBoxItem>Custom Port</ComboBoxItem>
 						</ComboBox>
 						<!-- Custom Database Port -->
-						<TextBlock Grid.Column="0" Grid.Row="2" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Custom Port:"/>
-						<TextBox Grid.Column="1" Grid.Row="2" Margin="10" Watermark="Custom Port"/>
+						<TextBlock Grid.Column="0" Grid.Row="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Custom Port:"/>
+						<TextBox x:Name="dbCustomPortBox" IsEnabled="False" Grid.Column="1" Grid.Row="3" Margin="10" Watermark="Custom Port"/>
 						<!-- Database Username -->
-						<TextBlock Grid.Column="0" Grid.Row="3" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Username:"/>
-						<TextBox Grid.Column="1" Grid.Row="3" Margin="10" Watermark="Username"/>
+						<TextBlock Grid.Column="0" Grid.Row="4" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Username:"/>
+						<TextBox x:Name="dbUserBox" Grid.Column="1" Grid.Row="4" Margin="10" Watermark="Username"/>
 						<!-- Database Password -->
-						<TextBlock Grid.Column="0" Grid.Row="4" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Password:"/>
-						<TextBox Grid.Column="1" Grid.Row="4" Margin="10" PasswordChar="*" Watermark="Password"/>
+						<TextBlock Grid.Column="0" Grid.Row="5" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Password:"/>
+						<TextBox x:Name="dbPassBox" Grid.Column="1" Grid.Row="5" Margin="10" PasswordChar="*" Watermark="Password"/>
 						<!-- Test Connection Button -->
-						<Button Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Margin="10" HorizontalAlignment="Center" Content="Test Database Connection"/>
+						<Button x:Name="dbTestConnectionBox" Click="TestDBConnection" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Margin="10" HorizontalAlignment="Center" Content="Test Database Connection"/>
+						<TextBlock x:Name="dbTestConnectionDebug" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="7" Margin="10" Text=""/>
 					</Grid>
 				</ScrollViewer>
 			</Border>
