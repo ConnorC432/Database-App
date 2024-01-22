@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
@@ -58,12 +59,17 @@ public partial class MainWindow : Window
         dbTestConnectionBox.IsEnabled = true;
     }
 
-    //Enable Custom Port Box
+    //Enable Custom Port Box when selected in drop-down
     public async void ComboBoxSelectionMade(object sender, SelectionChangedEventArgs e)
     {
-        /*if(dbPortBox.SelectedIndex != 0)
+        if (dbPortBox == null){return;}
+        if (dbPortBox.SelectedIndex == 0)
         {
             dbCustomPortBox.IsEnabled = true;
-        }*/
+        }
+        else
+        {
+            dbCustomPortBox.IsEnabled = false;
+        }
     }
 }

@@ -38,7 +38,7 @@
 							<ComboBoxItem>Custom Port</ComboBoxItem>
 							<!-- Default Database Ports -->
 							<ComboBoxItem>MS SQL - 1433</ComboBoxItem>
-							<ComboBoxItem>MSQL - 1434</ComboBoxItem>
+							<ComboBoxItem>MS SQL - 1434</ComboBoxItem>
 							<ComboBoxItem>Oracle DB - 1521</ComboBoxItem>
 							<ComboBoxItem>Oracle DB - 1830</ComboBoxItem>
 							<ComboBoxItem>MySQL - 3306</ComboBoxItem>
