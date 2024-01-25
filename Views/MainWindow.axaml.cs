@@ -1,8 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using SQLConnections;
 using System;
-using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -23,10 +23,10 @@ public partial class MainWindow : Window
 
         //Determine Port
         string dbPort;
-        string[] portValues = { "1433", "1434", "1521", "1830", "3306", "5432", "7210"};
+        string[] portValues = {"1433", "1434", "1521", "1830", "3306", "5432", "7210"};
         if (dbPortBox.SelectedIndex == 0)
         {
-            dbPort = dbCustomPortBox.Text;
+            dbPort = dbCustomPortBox.Text;user
         }
         else
         {
@@ -37,15 +37,21 @@ public partial class MainWindow : Window
         //Test Connection
         try
         {
-            using (SqlConnection sqlTest = new SqlConnection($"Server={dbIPBox.Text},{dbPort};Database={dbNameBox.Text};User Id={dbUserBox.Text};Password={dbPassBox.Text};"))
+            conn = new MySQL.Data.MySqlClient.MySqlConnection();
+            conn.ConnectionString = $"server={dbIPBox.Text};uid={dbUserBox.Text};pwd={dbPassBox.Text};database={dbNameBox.Text}";
+            conn.Open();
+            conn.Close();
+        }
+        /*try
+        {
+            //using (SqlConnection sqlTest = new SqlConnection($"Server={dbIPBox.Text},{dbPort};Database={dbNameBox.Text};User Id={dbUserBox.Text};Password={dbPassBox.Text};"))
             {
-                sqlTest.Open();
                 dbTestConnectionBox.Content = "Test Successful";
-                sqlTest.Close();
+                Console.WriteLine("SQL Connection Successful")
             }
         }
 
-        //Connection Failed
+        //Connection Failed*/
         catch (Exception exceptionText)
         {
             dbTestConnectionBox.Content = "Test Unsuccessful";
