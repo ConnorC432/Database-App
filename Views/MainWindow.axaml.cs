@@ -1,10 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using SQLConnections;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+using DatabaseApp.SQLConnection;
+using Org.BouncyCastle.Tsp;
 
 namespace DatabaseApp.Views;
 
@@ -26,7 +27,7 @@ public partial class MainWindow : Window
         string[] portValues = {"1433", "1434", "1521", "1830", "3306", "5432", "7210"};
         if (dbPortBox.SelectedIndex == 0)
         {
-            dbPort = dbCustomPortBox.Text;user
+            dbPort = dbCustomPortBox.Text;
         }
         else
         {
@@ -37,22 +38,15 @@ public partial class MainWindow : Window
         //Test Connection
         try
         {
-            conn = new MySQL.Data.MySqlClient.MySqlConnection();
-            conn.ConnectionString = $"server={dbIPBox.Text};uid={dbUserBox.Text};pwd={dbPassBox.Text};database={dbNameBox.Text}";
-            conn.Open();
-            conn.Close();
+            MySQLServer testServer = new MySQLServer();
+            testServer.serverHost = dbIPBox.Text;
+            testServer.serverName = dbNameBox.Text;
+            testServer.serverUser = dbUserBox.Text;
+            testServer.serverPass = dbPassBox.Text;
+            testServer.TestConnection();
         }
-        /*try
-        {
-            //using (SqlConnection sqlTest = new SqlConnection($"Server={dbIPBox.Text},{dbPort};Database={dbNameBox.Text};User Id={dbUserBox.Text};Password={dbPassBox.Text};"))
-            {
-                dbTestConnectionBox.Content = "Test Successful";
-                Console.WriteLine("SQL Connection Successful")
-            }
-        }
-
-        //Connection Failed*/
-        catch (Exception exceptionText)
+        //Connection Failed
+        catch (MySql.Data.MySqlClient.MySqlException exceptionText)
         {
             dbTestConnectionBox.Content = "Test Unsuccessful";
             dbTestConnectionDebug.Text = exceptionText.ToString();
@@ -66,7 +60,7 @@ public partial class MainWindow : Window
     }
 
     //Enable Custom Port Box when selected in drop-down
-    public async void ComboBoxSelectionMade(object sender, SelectionChangedEventArgs e)
+    public void ComboBoxSelectionMade(object sender, SelectionChangedEventArgs e)
     {
         if (dbPortBox == null){return;}
         if (dbPortBox.SelectedIndex == 0)
