@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using DatabaseApp.SQLConnection;
-using Org.BouncyCastle.Tsp;
 
 namespace DatabaseApp.Views;
 
@@ -24,27 +23,28 @@ public partial class MainWindow : Window
 
         //Determine Port
         string dbPort;
-        string[] portValues = {"1433", "1434", "1521", "1830", "3306", "5432", "7210"};
-        if (dbPortBox.SelectedIndex == 0)
+        if (dbPortBox.SelectedIndex != 0)
         {
             dbPort = dbCustomPortBox.Text;
         }
         else
         {
-            dbPort = portValues[(dbPortBox.SelectedIndex)-1];
+            dbPort = "3306";
         }
-        Console.WriteLine($"Testing SQL Connection at: {dbIPBox.Text}:{dbPort}");
 
         //Test Connection
         try
         {
             MySQLServer testServer = new MySQLServer();
             testServer.serverHost = dbIPBox.Text;
+            testServer.serverPort = dbPort;
             testServer.serverName = dbNameBox.Text;
             testServer.serverUser = dbUserBox.Text;
             testServer.serverPass = dbPassBox.Text;
             testServer.TestConnection();
+            dbTestConnectionBox.Content = "Test Successful";
         }
+
         //Connection Failed
         catch (MySql.Data.MySqlClient.MySqlException exceptionText)
         {
@@ -63,7 +63,7 @@ public partial class MainWindow : Window
     public void ComboBoxSelectionMade(object sender, SelectionChangedEventArgs e)
     {
         if (dbPortBox == null){return;}
-        if (dbPortBox.SelectedIndex == 0)
+        if (dbPortBox.SelectedIndex != 0)
         {
             dbCustomPortBox.IsEnabled = true;
         }

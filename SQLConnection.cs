@@ -15,16 +15,16 @@ namespace DatabaseApp.SQLConnection
         public string serverUser;
         public string serverPass;
         private string mySqlConnectionString;
-        public MySQLServer()
-        {
-            mySqlConnectionString = $"Server={serverHost};Database={serverName};Uid={serverUser};Pwd={serverPass};";
-        }
 
         public void TestConnection()
         {
+            //Generate connection string
+            mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Database={serverName}; Uid={serverUser}; Pwd={serverPass};";
+            //Open Connection
             MySqlConnection testConnection = new MySqlConnection(mySqlConnectionString);
             testConnection.Open();
             Console.WriteLine("Test Successful");
+            testConnection.Close();
         }
     }
 }
