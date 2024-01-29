@@ -55,22 +55,22 @@
 				</ScrollViewer>
 			</Border>
 		</TabItem>
-		<TabItem Header="Create">
-			<!-- Create Tab Contents-->
+		<!--TabItem Header="Create">
+			< Create Tab Contents>
 			<TextBlock Margin="5">Create Tab</TextBlock>
 		</TabItem>
 		<TabItem Header="Read">
-			<!-- Read Tab Contents-->
+			<! Read Tab Contents>
 			<TextBlock Margin="5">Read Tab</TextBlock>
 		</TabItem>
 		<TabItem Header="Update">
-			<!-- Update Tab Contents-->
+			< Update Tab Contents>
 			<TextBlock Margin="5">Update Tab</TextBlock>
 		</TabItem>
 		<TabItem Header="Delete">
-			<!-- Delete Tab Contents-->
+			< Delete Tab Contents>
 			<TextBlock Margin="5">Delete Tab</TextBlock>
-		</TabItem>
+		</TabItem-->
 	</TabControl>
 	
 </Window>
