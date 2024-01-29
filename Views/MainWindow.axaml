@@ -55,22 +55,10 @@
 				</ScrollViewer>
 			</Border>
 		</TabItem>
-		<!--TabItem Header="Create">
-			< Create Tab Contents>
-			<TextBlock Margin="5">Create Tab</TextBlock>
+		<TabItem Header="Database">
+			<!-- Database Tab View -->
+			<ContentControl x:Name="databaseTab"/>
 		</TabItem>
-		<TabItem Header="Read">
-			<! Read Tab Contents>
-			<TextBlock Margin="5">Read Tab</TextBlock>
-		</TabItem>
-		<TabItem Header="Update">
-			< Update Tab Contents>
-			<TextBlock Margin="5">Update Tab</TextBlock>
-		</TabItem>
-		<TabItem Header="Delete">
-			< Delete Tab Contents>
-			<TextBlock Margin="5">Delete Tab</TextBlock>
-		</TabItem-->
 	</TabControl>
 	
 </Window>
