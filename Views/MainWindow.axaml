@@ -55,7 +55,7 @@
 				<!-- Left Column -->
 				<TextBlock Grid.Column="0" Margin="5" Text="Left"/>
 				<!-- Splitter -->
-				<GridSplitter Grid.Column="1" Background="Black" ResizeDirection="Columns"/>
+				<GridSplitter Grid.Column="1" Background="CornflowerBlue" ResizeDirection="Columns"/>
 				<!-- Right Column -->
 				<TextBlock Grid.Column="2" Margin="5" Text="Right"/>
 			</Grid>
