@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.Interactivity;
+using Avalonia.Threading;
 using System;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
@@ -19,6 +20,8 @@ public partial class MainWindow : Window
     //Test Database Connection Button
     public async void TestDBConnection(object sender, RoutedEventArgs e)
     {
+        var uiThread = Avalonia.Threading.Dispatcher.UIThread;
+
         //Disable Button
         dbTestConnectionBox.IsEnabled = false;
 
@@ -36,28 +39,41 @@ public partial class MainWindow : Window
         //Test Connection
         try
         {
-            MySQLServer testServer = new MySQLServer();
-            testServer.serverHost = dbIPBox.Text;
-            testServer.serverPort = dbPort;
-            testServer.serverName = dbNameBox.Text;
-            testServer.serverUser = dbUserBox.Text;
-            testServer.serverPass = dbPassBox.Text;
-            testServer.TestConnection();
-            dbTestConnectionBox.Content = "Test Successful";
+            await Task.Run(() =>
+            {
+                MySQLServer testServer = new MySQLServer();
+                testServer.serverHost = uiThread.Invoke(() => dbIPBox.Text);
+                testServer.serverPort = dbPort;
+                //testServer.serverName = uiThread.Invoke(() => dbNameBox.Text);
+                testServer.serverUser = uiThread.Invoke(() => dbUserBox.Text);
+                testServer.serverPass = uiThread.Invoke(() => dbPassBox.Text);
+                testServer.TestConnection();
+                uiThread.Post(() =>
+                {
+                    dbTestConnectionBox.Content = "Test Successful";
+                });
+                //dbTestConnectionBox.Content = "Test Successful";
+            });
         }
 
         //Connection Failed
         catch (MySql.Data.MySqlClient.MySqlException exceptionText)
         {
-            dbTestConnectionBox.Content = "Test Unsuccessful";
-            dbTestConnectionDebug.Text = exceptionText.ToString();
-            Console.WriteLine(exceptionText);
+            uiThread.Post(() =>
+            {
+                dbTestConnectionBox.Content = "Test Unsuccessful";
+                dbTestConnectionDebug.Text = exceptionText.ToString();
+                Console.WriteLine(exceptionText);
+            });
         }
         
         // Wait 3s before re-enabling button.
         await Task.Delay(3000);
-        dbTestConnectionBox.Content = "Test Database Connection";
-        dbTestConnectionBox.IsEnabled = true;
+        uiThread.Post(() =>
+        {
+            dbTestConnectionBox.Content = "Test & Save Database Connection";
+            dbTestConnectionBox.IsEnabled = true;
+        });
     }
 
     //Enable Custom Port Box when selected in drop-down

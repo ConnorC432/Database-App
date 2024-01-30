@@ -9,12 +9,12 @@ namespace DatabaseApp.SQLConnection
 {
     public class MySQLServer
     {
-        public string serverName;
-        public string serverHost;
-        public string serverPort;
-        public string serverUser;
-        public string serverPass;
-        private string mySqlConnectionString;
+        public string serverName { get; set; } = "";
+        public string serverHost { get; set; } = "";
+        public string serverPort { get; set; } = "";
+        public string serverUser { get; set; } = "";
+        public string serverPass { get; set; } = "";
+        private string mySqlConnectionString { get; set; } = "";
 
         public void TestConnection()
         {
