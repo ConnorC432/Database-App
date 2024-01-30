@@ -11,12 +11,6 @@
 		Width="800" Height="600">
 
 
-	<Design.DataContext>
-		<!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-		<vm:MainWindowViewModel/>
-	</Design.DataContext>
-
 	<!-- Application Options Tab -->
 	<TabControl Margin="5">
 		<TabItem Header="Connect">
@@ -55,9 +49,16 @@
 				</ScrollViewer>
 			</Border>
 		</TabItem>
+		<!-- Database CRUD Tab Contents -->
 		<TabItem Header="Database">
-			<!-- Database Tab View -->
-			<ContentControl x:Name="databaseTab"/>
+			<Grid ColumnDefinitions="*, 4, *">
+				<!-- Left Column -->
+				<TextBlock Grid.Column="0" Margin="5" Text="Left"/>
+				<!-- Splitter -->
+				<GridSplitter Grid.Column="1" Background="Black" ResizeDirection="Columns"/>
+				<!-- Right Column -->
+				<TextBlock Grid.Column="2" Margin="5" Text="Right"/>
+			</Grid>
 		</TabItem>
 	</TabControl>
 	

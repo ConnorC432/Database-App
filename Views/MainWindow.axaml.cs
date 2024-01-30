@@ -64,7 +64,7 @@ public partial class MainWindow : Window
     public void ComboBoxSelectionMade(object sender, SelectionChangedEventArgs e)
     {
         if (dbPortBox == null){return;}
-        if (dbPortBox.SelectedIndex != 0)
+        else if (dbPortBox.SelectedIndex != 0)
         {
             dbCustomPortBox.IsEnabled = true;
         }
