@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using DatabaseApp.SQLConnection;
+using System.Configuration;
 
 namespace DatabaseApp.Views;
 
@@ -21,6 +22,8 @@ public partial class MainWindow : Window
     public async void TestDBConnection(object sender, RoutedEventArgs e)
     {
         var uiThread = Avalonia.Threading.Dispatcher.UIThread;
+        MySQLServer testServer = null;
+        bool testSuccess = false;
 
         //Disable Button
         dbTestConnectionBox.IsEnabled = false;
@@ -41,7 +44,7 @@ public partial class MainWindow : Window
         {
             await Task.Run(() =>
             {
-                MySQLServer testServer = new MySQLServer();
+                testServer = new MySQLServer();
                 testServer.serverHost = uiThread.Invoke(() => dbIPBox.Text);
                 testServer.serverPort = dbPort;
                 //testServer.serverName = uiThread.Invoke(() => dbNameBox.Text);
@@ -52,7 +55,7 @@ public partial class MainWindow : Window
                 {
                     dbTestConnectionBox.Content = "Test Successful";
                 });
-                //dbTestConnectionBox.Content = "Test Successful";
+                testSuccess = true;
             });
         }
 
@@ -65,6 +68,18 @@ public partial class MainWindow : Window
                 dbTestConnectionDebug.Text = exceptionText.ToString();
                 Console.WriteLine(exceptionText);
             });
+        }
+
+        //Save Database as new Object
+        finally
+        {
+            if (testServer != null && testSuccess == true)
+            {
+                MySQLServer databaseServer = new MySQLServer();
+                uiThread.Invoke(() => databaseServer.SaveVariables(testServer));
+                //Enable Database Tab
+                databaseTab.IsEnabled = true;
+            }
         }
         
         // Wait 3s before re-enabling button.

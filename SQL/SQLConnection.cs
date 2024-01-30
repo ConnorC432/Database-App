@@ -26,5 +26,15 @@ namespace DatabaseApp.SQLConnection
             Console.WriteLine("Test Successful");
             testConnection.Close();
         }
+
+        //Save Variables from testServer/other Object
+        public void SaveVariables(MySQLServer targetServer)
+        {
+            this.serverName = targetServer.serverName;
+            this.serverHost = targetServer.serverHost;
+            this.serverPort = targetServer.serverPass;
+            this.serverUser = targetServer.serverUser;
+            this.serverPass = targetServer.serverPass;
+        }
     }
 }

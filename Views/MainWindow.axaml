@@ -50,7 +50,7 @@
 			</Border>
 		</TabItem>
 		<!-- Database CRUD Tab Contents -->
-		<TabItem Header="Database">
+		<TabItem x:Name="databaseTab" IsEnabled="False" Header="Database">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" MinWidth="100"/>
