@@ -48,10 +48,9 @@ public partial class MainWindow : Window
                 testServer = new MySQLServer();
                 testServer.serverHost = uiThread.Invoke(() => dbIPBox.Text);
                 testServer.serverPort = dbPort;
-                //testServer.serverName = uiThread.Invoke(() => dbNameBox.Text);
+                testServer.serverName = uiThread.Invoke(() => dbNameBox.Text);
                 testServer.serverUser = uiThread.Invoke(() => dbUserBox.Text);
                 testServer.serverPass = uiThread.Invoke(() => dbPassBox.Text);
-                testServer.serverName = uiThread.Invoke(() => "mysql");
                 testServer.TestConnection();
                 uiThread.Post(() =>
                 {
@@ -82,7 +81,7 @@ public partial class MainWindow : Window
 
                 //Populate Database Tab
                 SQLDatabaseTab populateDB = new SQLDatabaseTab();
-                populateDB.PopulateDatabases(databaseServer.mySqlConnectionString);
+                uiThread.Invoke(() => populateDB.PopulateDatabases(databaseServer.GenerateConnectionString()));
 
                 //Enable Database Tab
                 databaseTab.IsEnabled = true;

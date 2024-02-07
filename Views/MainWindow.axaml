@@ -19,9 +19,9 @@
 				<!-- Scroll Wheel for Database Connect Settings -->
 				<ScrollViewer>
 					<Grid ColumnDefinitions="Auto,1*,2*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto" Margin="5">
-						<!-- Database Name >
+						<!-- Database Name -->
 						<TextBlock Grid.Column="0" Grid.Row="0" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database Name:"/>
-						<TextBox x:Name="dbNameBox" Grid.Column="1" Grid.Row="0" Margin="10" Watermark="Name"/-->
+						<TextBox x:Name="dbNameBox" Grid.Column="1" Grid.Row="0" Margin="10" Watermark="Name"/>
 						<!-- Database IP/DNS -->
 						<TextBlock Grid.Column="0" Grid.Row="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right" Text="Database IP/DNS:"/>
 						<TextBox x:Name="dbIPBox" Grid.Column="1" Grid.Row="1" Margin="10" Watermark="IP/DNS"/>
