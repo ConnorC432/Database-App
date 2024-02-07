@@ -16,13 +16,16 @@ namespace DatabaseApp.SQLConnection
         public string serverPass { get; set; } = "";
         public string mySqlConnectionString { get; set; } = "";
 
+        //Generate Connection String
+        public string GenerateConnectionString()
+        {
+            return mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Database={serverName}; Uid={serverUser}; Pwd={serverPass};";
+        }
+
         public void TestConnection()
         {
-            //Generate connection string
-            //mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Database={serverName}; Uid={serverUser}; Pwd={serverPass};";
-            mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Uid={serverUser}; Pwd={serverPass};";
             //Open Connection
-            MySqlConnection testConnection = new MySqlConnection(mySqlConnectionString);
+            MySqlConnection testConnection = new MySqlConnection(GenerateConnectionString());
             testConnection.Open();
             Console.WriteLine("Test Successful");
             testConnection.Close();
@@ -33,9 +36,10 @@ namespace DatabaseApp.SQLConnection
         {
             this.serverName = targetServer.serverName;
             this.serverHost = targetServer.serverHost;
-            this.serverPort = targetServer.serverPass;
+            this.serverPort = targetServer.serverPort;
             this.serverUser = targetServer.serverUser;
             this.serverPass = targetServer.serverPass;
+            this.mySqlConnectionString = targetServer.mySqlConnectionString;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace DatabaseApp.SQLDatabases
     {
         public void PopulateDatabases(string dbString)
         {
-            using (var conn = new MySqlConnection(dbString))
+            using (MySqlConnection conn = new MySqlConnection(dbString))
             {
                 conn.Open();
                 var databases = FindDatabases(conn);
@@ -57,7 +57,7 @@ namespace DatabaseApp.SQLDatabases
         private List<string> FindDatabases(MySqlConnection conn)
         {
             var databases = new List<string>();
-            var findDB = new MySqlCommand("SHOW DATABASES", conn);
+            var findDB = new MySqlCommand("SHOW DATABASES WHERE `Database` NOT IN ('information_schema', 'performance_schema', 'mysql')", conn);
             using (var reader = findDB.ExecuteReader())
             {
                 while (reader.Read())
@@ -72,7 +72,7 @@ namespace DatabaseApp.SQLDatabases
         private List<string> FindTables(MySqlConnection conn, string database)
         {
             var tables = new List<string>();
-            var findTables = new MySqlCommand($"SHOW TABLES FROM '{database}'", conn);
+            var findTables = new MySqlCommand($"SHOW TABLES FROM {database}", conn);
             using (var reader = findTables.ExecuteReader())
             {
                 while (reader.Read())
