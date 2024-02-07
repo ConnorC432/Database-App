@@ -12,7 +12,7 @@
 
 
 	<!-- Application Options Tab -->
-	<TabControl Margin="5">
+	<TabControl x:Name="TabControl" Margin="5">
 		<TabItem Header="Connect">
 			<!-- Connect to Database Tab Contents -->
 			<Border>
@@ -58,17 +58,7 @@
 					<ColumnDefinition Width="*" MinWidth="100"/>
 				</Grid.ColumnDefinitions>
 				<!-- Left Column -->
-				<!-- Database -->
-				<Expander VerticalAlignment="Top">
-					<Expander.Header>
-						Database1
-					</Expander.Header>
-					<!-- Tables Grid -->
-					<Grid RowDefinitions="Auto,Auto">
-						<Button Grid.Row="0" Margin="5" Content="Table1"/>
-						<Button Grid.Row="1" Margin="5" Content="Table2"/>
-					</Grid>
-				</Expander>
+
 				<!-- Splitter -->
 				<GridSplitter Grid.Column="1" Background="CornflowerBlue" ResizeDirection="Columns"/>
 				<!-- Right Column -->

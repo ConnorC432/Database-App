@@ -19,12 +19,14 @@ namespace DatabaseApp.SQLConnection
         public void TestConnection()
         {
             //Generate connection string
-            mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Database={serverName}; Uid={serverUser}; Pwd={serverPass};";
+            //mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Database={serverName}; Uid={serverUser}; Pwd={serverPass};";
+            mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Uid={serverUser}; Pwd={serverPass};";
             //Open Connection
             MySqlConnection testConnection = new MySqlConnection(mySqlConnectionString);
-            testConnection.Open();
+            /*testConnection.Open();
             Console.WriteLine("Test Successful");
-            testConnection.Close();
+            testConnection.Close();*/
+
         }
 
         //Save Variables from testServer/other Object
