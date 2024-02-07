@@ -19,10 +19,10 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    private void InitializeComponent()
+    /*private void InitializeComponent()
     {
         AvaloniaXamlLoader.Load(this);
-    }
+    }*/
 
     //Test Database Connection Button
     public async void TestDBConnection(object sender, RoutedEventArgs e)
@@ -57,12 +57,11 @@ public partial class MainWindow : Window
                 testServer.serverUser = uiThread.Invoke(() => dbUserBox.Text);
                 testServer.serverPass = uiThread.Invoke(() => dbPassBox.Text);
                 testServer.serverName = uiThread.Invoke(() => "mysql");
-                /*testServer.TestConnection();
+                testServer.TestConnection();
                 uiThread.Post(() =>
                 {
                     dbTestConnectionBox.Content = "Test Successful";
                 });
-                testSuccess = true;*/
 
             });
         }

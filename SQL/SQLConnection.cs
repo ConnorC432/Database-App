@@ -23,10 +23,9 @@ namespace DatabaseApp.SQLConnection
             mySqlConnectionString = $"Server={serverHost}; Port={serverPort}; Uid={serverUser}; Pwd={serverPass};";
             //Open Connection
             MySqlConnection testConnection = new MySqlConnection(mySqlConnectionString);
-            /*testConnection.Open();
+            testConnection.Open();
             Console.WriteLine("Test Successful");
-            testConnection.Close();*/
-
+            testConnection.Close();
         }
 
         //Save Variables from testServer/other Object
