@@ -11,44 +11,35 @@ using Avalonia.Controls;
 
 namespace DatabaseApp.SQLDatabases
 {
+    public class DatabaseEntryObject
+    {
+        public string dbEntryName { get; set; }
+        public List<string> tableName { get; set; }
+    }
     public class SQLDatabaseTab
     {
-        public void PopulateDatabases(string dbString)
+        public void PopulateDatabases(string dbString, DataGrid dataGrid)
         {
             using (MySqlConnection conn = new MySqlConnection(dbString))
             {
-                conn.Open();
-                var databases = FindDatabases(conn);
-
-                foreach (var database in databases)
+                try
                 {
-                    var tabItem = new TabItem();
-                    tabItem.Header = database;
-
-                    var databaseEntry = new Expander();
-                    databaseEntry.Header = database;
-                    var grid = new Grid();
-
-                    var tableEntry = FindTables(conn, database);
-                    int row = 0;
-                    foreach (var table in tableEntry)
+                    conn.Open();
+                    var databaseList = FindDatabases(conn);
+                    foreach (var databaseEntry in databaseList)
                     {
-                        var button = new Button();
-                        button.Content = table;
-                        button.Click += (sender, e) =>
+                        var tableList = FindTables(conn, databaseEntry);
+                        var entryObject = new DatabaseEntryObject
                         {
-                            Console.WriteLine($"Table '{table}' clicked");
+                            dbEntryName = databaseEntry,
+                            tableName = tableList
                         };
-                        grid.RowDefinitions.Add(new RowDefinition());
-                        grid.Children.Add(button);
-                        Grid.SetRow(button, row);
-                        row++;
+                        dataGrid.Items.Add(entryObject);
                     }
-                
-                databaseEntry.Content = grid;
-                tabItem.Content = databaseEntry;
-                var tabControl = new TabControl();
-                tabControl.Items.Add(tabItem);
+                }
+                catch
+                {
+                    Console.WriteLine("DB Population Failed");
                 }
             }
         }
@@ -56,31 +47,31 @@ namespace DatabaseApp.SQLDatabases
         //Find Database tables
         private List<string> FindDatabases(MySqlConnection conn)
         {
-            var databases = new List<string>();
+            databaseList = new List<string>();
             var findDB = new MySqlCommand("SHOW DATABASES WHERE `Database` NOT IN ('information_schema', 'performance_schema', 'mysql')", conn);
             using (var reader = findDB.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    databases.Add(reader.GetString(0));
+                    databaseList.Add(reader.GetString(0));
                 }
             }
-            return databases;
+            return databaseList;
         }
 
         //Find Tables
-        private List<string> FindTables(MySqlConnection conn, string database)
+        private List<string> FindTables(MySqlConnection conn, string databaseEntry)
         {
-            var tables = new List<string>();
-            var findTables = new MySqlCommand($"SHOW TABLES FROM {database}", conn);
+            tableList = new List<string>();
+            var findTables = new MySqlCommand($"SHOW TABLES FROM {databaseEntry}", conn);
             using (var reader = findTables.ExecuteReader())
             {
                 while (reader.Read())
                 {
-                    tables.Add(reader.GetString(0));
+                    tableList.Add(reader.GetString(0));
                 }
             }
-            return tables;
+            return tableList;
         }
     }
 }

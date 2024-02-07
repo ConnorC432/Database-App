@@ -50,7 +50,7 @@
 			</Border>
 		</TabItem>
 		<!-- Database CRUD Tab Contents -->
-		<TabItem x:Name="databaseTab" IsEnabled="False" Header="Database">
+		<TabItem IsEnabled="False" Header="Database">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" MinWidth="100"/>
@@ -58,11 +58,14 @@
 					<ColumnDefinition Width="*" MinWidth="100"/>
 				</Grid.ColumnDefinitions>
 				<!-- Left Column -->
-
+				<ScrollViewer>
+					<DataGrid x:Name="databaseListGrid"/>
+				</ScrollViewer>
 				<!-- Splitter -->
 				<GridSplitter Grid.Column="1" Background="CornflowerBlue" ResizeDirection="Columns"/>
 				<!-- Right Column -->
-				<TextBlock Grid.Column="2" Margin="5" Text="Right"/>
+				<ScrollViewer>
+				</ScrollViewer>
 			</Grid>
 		</TabItem>
 	</TabControl>
