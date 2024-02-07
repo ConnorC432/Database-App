@@ -14,7 +14,7 @@ namespace DatabaseApp.SQLConnection
         public string serverPort { get; set; } = "";
         public string serverUser { get; set; } = "";
         public string serverPass { get; set; } = "";
-        private string mySqlConnectionString { get; set; } = "";
+        public string mySqlConnectionString { get; set; } = "";
 
         public void TestConnection()
         {

@@ -19,11 +19,6 @@ public partial class MainWindow : Window
         InitializeComponent();
     }
 
-    /*private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
-    }*/
-
     //Test Database Connection Button
     public async void TestDBConnection(object sender, RoutedEventArgs e)
     {
@@ -84,6 +79,11 @@ public partial class MainWindow : Window
             {
                 MySQLServer databaseServer = new MySQLServer();
                 uiThread.Invoke(() => databaseServer.SaveVariables(testServer));
+
+                //Populate Database Tab
+                SQLDatabaseTab populateDB = new SQLDatabaseTab();
+                populateDB.PopulateDatabases(databaseServer.mySqlConnectionString);
+
                 //Enable Database Tab
                 databaseTab.IsEnabled = true;
             }

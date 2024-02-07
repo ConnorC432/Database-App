@@ -8,7 +8,6 @@ using DatabaseApp.SQLConnection;
 using DatabaseApp.Views;
 using System.Data;
 using Avalonia.Controls;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace DatabaseApp.SQLDatabases
 {

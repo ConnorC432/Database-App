@@ -12,7 +12,7 @@
 
 
 	<!-- Application Options Tab -->
-	<TabControl x:Name="TabControl" Margin="5">
+	<TabControl Margin="5">
 		<TabItem Header="Connect">
 			<!-- Connect to Database Tab Contents -->
 			<Border>
@@ -66,5 +66,4 @@
 			</Grid>
 		</TabItem>
 	</TabControl>
-	
 </Window>
