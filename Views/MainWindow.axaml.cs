@@ -62,7 +62,7 @@ public partial class MainWindow : Window
                 {
                     dbTestConnectionBox.Content = "Test Successful";
                 });
-
+                testSuccess = true;
             });
         }
 
