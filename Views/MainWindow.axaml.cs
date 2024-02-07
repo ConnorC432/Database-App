@@ -80,7 +80,7 @@ public partial class MainWindow : Window
                 uiThread.Invoke(() => databaseServer.SaveVariables(testServer));
 
                 //Populate Database Tab
-                SQLDatabaseTab populateDB = new SQLDatabaseTab();
+                SQLDatabaseEntries populateDB = new SQLDatabaseEntries();
                 uiThread.Invoke(() => populateDB.PopulateDatabases(databaseServer.GenerateConnectionString()));
 
                 //Enable Database Tab
