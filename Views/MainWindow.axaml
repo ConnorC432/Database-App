@@ -12,7 +12,7 @@
 
 
 	<!-- Application Options Tab -->
-	<TabControl Margin="5">
+	<TabControl>
 		<TabItem Header="Connect">
 			<!-- Connect to Database Tab Contents -->
 			<Border>
