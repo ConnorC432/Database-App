@@ -7,6 +7,7 @@ using System;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using DatabaseApp.SQLConnection;
+using DatabaseApp.SQLDatabases;
 using System.Configuration;
 
 namespace DatabaseApp.Views;
@@ -50,6 +51,7 @@ public partial class MainWindow : Window
                 //testServer.serverName = uiThread.Invoke(() => dbNameBox.Text);
                 testServer.serverUser = uiThread.Invoke(() => dbUserBox.Text);
                 testServer.serverPass = uiThread.Invoke(() => dbPassBox.Text);
+                testServer.serverName = uiThread.Invoke(() => "mysql");
                 testServer.TestConnection();
                 uiThread.Post(() =>
                 {
