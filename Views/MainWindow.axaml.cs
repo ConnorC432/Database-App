@@ -14,9 +14,13 @@ namespace DatabaseApp.Views;
 
 public partial class MainWindow : Window
 {
+    public StackPanel DatabaseStackPanel { get; private set; }
     public MainWindow()
     {
         InitializeComponent();
+        AvaloniaXamlLoader.Load(this);
+        this.AttachDevTools();
+        DatabaseStackPanel = this.FindControl<StackPanel>("databaseStackPanel");
     }
 
     //Test Database Connection Button
@@ -81,7 +85,7 @@ public partial class MainWindow : Window
 
                 //Populate Database Tab
                 SQLDatabaseEntries populateDB = new SQLDatabaseEntries();
-                uiThread.Invoke(() => populateDB.PopulateDatabases(databaseServer.GenerateConnectionString()));
+                uiThread.Invoke(() => populateDB.PopulateDatabases(DatabaseStackPanel, databaseServer.GenerateConnectionString()));
 
                 //Enable Database Tab
                 databaseTab.IsEnabled = true;
